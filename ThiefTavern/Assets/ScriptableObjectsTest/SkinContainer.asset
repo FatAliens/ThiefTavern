@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3fbbfe7e4ee7b64a90abae77b746d08, type: 3}
+  m_Name: SkinContainer
+  m_EditorClassIdentifier: 
+  Fractions:
+  - {fileID: 11400000, guid: dad190e670b25a742a5eb27b55363570, type: 2}
+  - {fileID: 11400000, guid: 749b15d9747609449b9b0741b066c219, type: 2}
+  - {fileID: 11400000, guid: 86135b761360a054aaab1f6ef00d45fe, type: 2}
+  - {fileID: 11400000, guid: 7f1e535351982984a8c5775224534de4, type: 2}
