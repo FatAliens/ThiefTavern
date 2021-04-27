@@ -141,13 +141,6 @@ public class UINavigation : MonoBehaviour
         this.gameObject.transform.DOLocalMoveX(targetPosition.x, TweenDuration).OnComplete(() => isTweening = false);
         this.gameObject.transform.DOLocalMoveY(targetPosition.y, TweenDuration);
     }
-    public void ResetCheck()
-    {
-        if(loss.IsLoaded == true)
-        {
-            SceneManager.LoadScene("TransitionUI");
-        }
-    }
 
     public void OnLeftSwipe()
     {
