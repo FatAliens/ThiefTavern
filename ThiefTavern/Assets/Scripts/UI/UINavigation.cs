@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using UnityEngine.SceneManagement;
 
 public class UINavigation : MonoBehaviour
 {
@@ -54,7 +55,7 @@ public class UINavigation : MonoBehaviour
     private NavigationPosition currentPosition = NavigationPosition.Center;
 
     private bool isTweening = false;
-
+    public LossUI loss;
     private Transform mainCamera;
 
     private void Start()
@@ -139,6 +140,13 @@ public class UINavigation : MonoBehaviour
         isTweening = true;
         this.gameObject.transform.DOLocalMoveX(targetPosition.x, TweenDuration).OnComplete(() => isTweening = false);
         this.gameObject.transform.DOLocalMoveY(targetPosition.y, TweenDuration);
+    }
+    public void ResetCheck()
+    {
+        if(loss.IsLoaded == true)
+        {
+            SceneManager.LoadScene("TransitionUI");
+        }
     }
 
     public void OnLeftSwipe()
