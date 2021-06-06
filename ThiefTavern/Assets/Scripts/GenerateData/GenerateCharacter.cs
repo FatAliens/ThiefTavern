@@ -6,7 +6,7 @@ public class GenerateCharacter : MonoBehaviour
 {
     public Sprite CharacterSkin;
     public int Fraction;
-    public QuestsInfo CharacterQuest;
+    public Quest CharacterQuest;
     void Start()
     {
         Fraction = Random.Range(0, 4);

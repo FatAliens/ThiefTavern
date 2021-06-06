@@ -8,13 +8,13 @@ public class CharacterInfo : MonoBehaviour
 
     [SerializeField] private Sprite CharacterSkin;
 
-    [SerializeField] SkinsContainer SkinContainer;
+    [SerializeField] FractionSkinsContainer SkinContainer;
 
     [SerializeField] private int SpriteNumber;
     [SerializeField] private int FractionSkinsNumber;
 
-    [SerializeField] private QuestsContainer QuestContainer;
-    [SerializeField] private QuestsInfo Quest;
+    [SerializeField] private FractionQuestsContainer QuestContainer;
+    [SerializeField] private Quest Quest;
 
     [SerializeField] private int QuestChance;
     [SerializeField] private int QuestNumber;
@@ -24,7 +24,7 @@ public class CharacterInfo : MonoBehaviour
     {
         Fraction = Random.Range(0, 4);
     }
-    public QuestsInfo GenerateCharacterQuest(int Fraction)
+    public Quest GenerateCharacterQuest(int Fraction)
     {   
         QuestChance = Random.Range(0, 100);
         if (QuestChance >= 0 && QuestChance <= 20)
