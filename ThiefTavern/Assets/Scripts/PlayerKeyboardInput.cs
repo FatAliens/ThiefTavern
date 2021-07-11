@@ -7,27 +7,44 @@ using Sirenix.OdinInspector;
 
 public class PlayerKeyboardInput : MonoBehaviour
 {
-    [FoldoutGroup("Move Events/Left"), SerializeField] private UnityEvent _startMoveLeft;
-    [FoldoutGroup("Move Events/Left"), SerializeField] private UnityEvent _endMoveLeft;
-    
-    [FoldoutGroup("Move Events/Right"), SerializeField] private UnityEvent _startMoveRight;
-    [FoldoutGroup("Move Events/Right"), SerializeField] private UnityEvent _endMoveRight;
-    
-    [FoldoutGroup("Run Events"), SerializeField] private UnityEvent _startRun;
-    [FoldoutGroup("Run Events"), SerializeField] private UnityEvent _endRun;
-    
-    [FoldoutGroup("Hide Events"), SerializeField] private UnityEvent _startHide;
-    [FoldoutGroup("Hide Events"), SerializeField] private UnityEvent _endHide;
-    
+    [FoldoutGroup("Move Events"), SerializeField]
+    private UnityEvent _changeMoveVector;
+
+    [FoldoutGroup("Run Events"), SerializeField]
+    private UnityEvent _startRun;
+
+    [FoldoutGroup("Run Events"), SerializeField]
+    private UnityEvent _endRun;
+
+    [FoldoutGroup("Hide Events"), SerializeField]
+    private UnityEvent _startHide;
+
+    [FoldoutGroup("Hide Events"), SerializeField]
+    private UnityEvent _endHide;
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        
+        
+        
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            _startMoveLeft.Invoke();
+            _startRun.Invoke();
         }
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+
+        if (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.LeftControl))
         {
-            _startMoveRight.Invoke();
+            _startHide.Invoke();
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            _endRun.Invoke();
+        }
+
+        if (Input.GetKeyUp(KeyCode.C) || Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            _endHide.Invoke();
         }
     }
 }
