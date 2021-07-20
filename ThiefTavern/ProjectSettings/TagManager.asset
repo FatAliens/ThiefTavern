@@ -5,6 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - hide_zone
+  - Cityzen
+  - Guard
+  - Archer
+  - Dog
+  - Priest
+  - DeadComrade
+  - CheckedDeadComrade
   layers:
   - Default
   - TransparentFX
@@ -14,7 +21,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Obstacle
   - 
   - 
   - 
