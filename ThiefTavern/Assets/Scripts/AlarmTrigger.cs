@@ -20,7 +20,7 @@ namespace Pathfinding {
         {
             if (other.gameObject.tag == "Alive_NPC")
             {
-                other.gameObject.GetComponent<NPC_Controller>().IsFree = false;
+                other.gameObject.GetComponent<NPCVision>().AI_Parent.GetComponent<NPC_Controller>().IsFree = false;
             }
         }
     }

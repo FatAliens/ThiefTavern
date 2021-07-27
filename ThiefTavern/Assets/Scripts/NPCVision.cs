@@ -2,27 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCVision : MonoBehaviour
+namespace Pathfinding
 {
-    // Start is called before the first frame update
-    public GameObject AlarmTrigger;
-    public bool InAlarmTrigger;
-    void Start()
+    public class NPCVision : MonoBehaviour
     {
-        
-    }
+        // Start is called before the first frame update
+        public GameObject AlarmTrigger;
+        public bool InAlarmTrigger;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if(other.gameObject.tag == "DeadComrade")
+        public GameObject AI_Parent;
+
+        public GameObject DeadComrade;
+        void Start()
         {
-            AlarmTrigger.transform.position = other.gameObject.transform.position;
-            AlarmTrigger.GetComponent<BoxCollider2D>().enabled = true;
+
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.gameObject.tag == "DeadComrade")
+            {
+                AlarmTrigger.transform.position = other.gameObject.transform.position;
+                AlarmTrigger.SetActive(true);
+                DeadComrade = other.gameObject;
+            }
         }
     }
 }

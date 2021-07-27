@@ -13,10 +13,12 @@ namespace Pathfinding
         public GameObject[] AlarmPointsRIGHT = new GameObject[3];
         public GameObject AlarmPoint;
 
-        public bool IsFree; //не идет к трупу
+        public bool IsFree = true; //не идет к трупу
 
-        public bool ReachedPoint;
         public GameObject DestinationPoint;
+
+        public float CheckDeadTimer = 3f;
+        public GameObject Vision;
         void Start()
         {
             ChangeDestinationPoint(RandomWalkPoint(WalkPoints, WalkPoint));
@@ -26,11 +28,19 @@ namespace Pathfinding
         {
             if(IsFree == false)
             {
-                ChangeDestinationPoint(RandomAlarmPoint(AlarmPointsLEFT, AlarmPointsRIGHT, AlarmPoint));
+                RandomAlarmPoint(AlarmPointsLEFT, AlarmPointsRIGHT); //Должно сработать 1 раз
+                ChangeDestinationPoint(AlarmPoint); //Должно сработать 1 раз
+                if (CheckWalkPointDistance(DestinationPoint) == true)
+                {
+                    CheckingDeadComrade(CheckDeadTimer);
+                }
             }
-            else
+            else if(IsFree == true)
             {
-                
+                if(CheckWalkPointDistance(DestinationPoint) == true)
+                {
+                    ChangeDestinationPoint(RandomWalkPoint(WalkPoints, WalkPoint)); //Должно сработать 1 раз?????
+                }
             }
         }
         public void ChangeDestinationPoint(GameObject Point)
@@ -45,7 +55,7 @@ namespace Pathfinding
                 return WalkPoint;
         }
 
-        public GameObject RandomAlarmPoint(GameObject[] AlarmPointsLeft, GameObject[] AlarmPointsRight, GameObject AlarmPoint)
+        public void RandomAlarmPoint(GameObject[] AlarmPointsLeft, GameObject[] AlarmPointsRight)
         {
             if(gameObject.GetComponent<AIPath>().desiredVelocity.x >= 0.01f)
             {
@@ -55,20 +65,43 @@ namespace Pathfinding
             {
                 AlarmPoint = AlarmPointsRight[Random.Range(0, AlarmPointsRight.Length - 1)];
             }
-            return AlarmPoint;
         }
 
-        public bool CheckWalkPointDistance(bool Reached, GameObject Destination)
+        /*public GameObject RandomAlarmPoint(GameObject[] AlarmPointsLeft, GameObject[] AlarmPointsRight, GameObject AlarmPoint)
         {
-            if(Mathf.Abs(gameObject.transform.position.x - Destination.transform.position.x) <= 0.1f)
+            if (gameObject.GetComponent<AIPath>().desiredVelocity.x >= 0.01f)
             {
-                Reached = true;
+                AlarmPoint = AlarmPointsLeft[Random.Range(0, AlarmPointsLeft.Length - 1)];
+            }
+            else if (gameObject.GetComponent<AIPath>().desiredVelocity.x <= -0.01f)
+            {
+                AlarmPoint = AlarmPointsRight[Random.Range(0, AlarmPointsRight.Length - 1)];
+            }
+            return AlarmPoint;
+        } */
+
+        public bool CheckWalkPointDistance(GameObject Destination)
+        {
+            if(Mathf.Abs(gameObject.transform.position.x - Destination.transform.position.x) <= 0.2f)
+            {
+                return true;
             }
             else
             {
-                Reached = false;
+                return false;
             }
-            return Reached;
+        }
+
+        public void CheckingDeadComrade(float Timer)
+        {
+            Timer -= Time.fixedDeltaTime;
+            if(Timer <= 0f)
+            {
+                Timer = 3f;
+                Vision.GetComponent<NPCVision>().DeadComrade.tag = "CheckedDeadComrade";
+                Vision.GetComponent<NPCVision>().AlarmTrigger.SetActive(false);
+                IsFree = true;
+            }
         }
     }
 }
