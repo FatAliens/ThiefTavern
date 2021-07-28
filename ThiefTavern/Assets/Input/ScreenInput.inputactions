@@ -1,0 +1,45 @@
+{
+    "name": "ScreenInput",
+    "maps": [
+        {
+            "name": "ScreenInput",
+            "id": "4a2d931d-3582-4708-bd21-0dbd4e52c44a",
+            "actions": [
+                {
+                    "name": "ItemPickUp",
+                    "type": "Button",
+                    "id": "760ea2cd-8398-45e6-ae7d-08602bba2100",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "7034f363-9810-44be-bba3-146a427844a3",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Android",
+                    "action": "ItemPickUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Android",
+            "bindingGroup": "Android",
+            "devices": [
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}

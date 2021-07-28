@@ -3,27 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class ClickableObject : MonoBehaviour
 {
     
     [SerializeField]private UnityEvent OnClick;
+    [SerializeField] private float SecondsTilDestroy;
     
-    private void ItemCollection()
+    public void ItemCollection(InputAction.CallbackContext context)
     {
-        StartCoroutine(nameof(WaitForSeconds));
+        if (context.performed)
+        {
+            StartCoroutine(nameof(WaitForSeconds));
+        }
     }
     private IEnumerator WaitForSeconds()
     {
         OnClick?.Invoke();
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(SecondsTilDestroy);
         Destroy(gameObject);
     }
 
-    public void OnMouseDown()
-    {
-        ItemCollection();
-    }
 
    
 }

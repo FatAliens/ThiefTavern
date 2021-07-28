@@ -44,6 +44,7 @@ SpriteAtlas:
     packables:
     - {fileID: 2800000, guid: 444387c74d060c746829ae4bba521929, type: 3}
     - {fileID: 2800000, guid: db975475da6098a4bb49bfd69fc13085, type: 3}
+    - {fileID: 2800000, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -444,6 +445,42 @@ SpriteAtlas:
   - {fileID: -5915501137280861304, guid: 444387c74d060c746829ae4bba521929, type: 3}
   - {fileID: 603240199951416116, guid: 444387c74d060c746829ae4bba521929, type: 3}
   - {fileID: 4776160273967372862, guid: 444387c74d060c746829ae4bba521929, type: 3}
+  - {fileID: -306769584054797851, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: -1812622870845383731, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: 6885022417403909228, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: -4674716053250276314, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: 5072330789217492574, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: 6725248867190496366, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: -9192652683673132943, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: 1673463356798356799, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: 2209852721740176325, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: -8196879873993058364, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: -1482169833790633551, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: 7081181967641049575, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: 3384227001169906400, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: 7207007485240075258, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: -6464999744976507531, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: -5066927500924315567, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: -2986964597796030388, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: -2803793319115667238, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: 8343657037459545126, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: 2481389407331463000, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: -4997922474497519815, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: 3169768328798283213, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: -1410729615429163618, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: -6267463830266913776, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: -3664793639081841496, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: -6784872366173402008, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: -6811663278770934881, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: -792003828247282404, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: 9178477917334762201, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: -5008111633854624084, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: -5531667065115770774, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: -314907479434009189, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: -8772496522307929537, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: -628600606110233376, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: 7824359131338227319, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
+  - {fileID: 7353248514426670886, guid: dbd91e78f6104e1418f9368e52e405ca, type: 3}
   m_PackedSpriteNamesToIndex:
   - mebel_29
   - mebel_28
@@ -842,5 +879,41 @@ SpriteAtlas:
   - texter_mega_pack_120
   - texter_mega_pack_172
   - texter_mega_pack_121
+  - super_pak_misha_stail_18
+  - super_pak_misha_stail_19
+  - super_pak_misha_stail_9
+  - super_pak_misha_stail_8
+  - super_pak_misha_stail_10
+  - super_pak_misha_stail_11
+  - super_pak_misha_stail_12
+  - super_pak_misha_stail_13
+  - super_pak_misha_stail_1
+  - super_pak_misha_stail_14
+  - super_pak_misha_stail_0
+  - super_pak_misha_stail_15
+  - super_pak_misha_stail_3
+  - super_pak_misha_stail_16
+  - super_pak_misha_stail_2
+  - super_pak_misha_stail_17
+  - super_pak_misha_stail_5
+  - super_pak_misha_stail_34
+  - super_pak_misha_stail_4
+  - super_pak_misha_stail_35
+  - super_pak_misha_stail_7
+  - super_pak_misha_stail_32
+  - super_pak_misha_stail_6
+  - super_pak_misha_stail_33
+  - super_pak_misha_stail_30
+  - super_pak_misha_stail_31
+  - super_pak_misha_stail_21
+  - super_pak_misha_stail_20
+  - super_pak_misha_stail_23
+  - super_pak_misha_stail_22
+  - super_pak_misha_stail_25
+  - super_pak_misha_stail_24
+  - super_pak_misha_stail_27
+  - super_pak_misha_stail_26
+  - super_pak_misha_stail_29
+  - super_pak_misha_stail_28
   m_Tag: tileAtlas
   m_IsVariant: 0
