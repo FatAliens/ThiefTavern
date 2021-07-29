@@ -30,6 +30,13 @@ namespace Pathfinding
                 AlarmTrigger.transform.position = other.gameObject.transform.position;
                 AlarmTrigger.SetActive(true);
                 DeadComrade = other.gameObject;
+                
+            }
+
+            if (other.gameObject.tag == "Player")
+            {
+                AlarmTrigger.transform.position = other.gameObject.transform.position;
+                AlarmTrigger.SetActive(true);
             }
         }
     }

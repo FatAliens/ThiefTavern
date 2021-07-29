@@ -9,6 +9,7 @@ namespace Pathfinding
         public GameObject[] WalkPoints = new GameObject[8];
         public GameObject WalkPoint;
 
+        public GameObject AlarmTrigger;
         public GameObject[] AlarmPointsLEFT = new GameObject[3];
         public GameObject[] AlarmPointsRIGHT = new GameObject[3];
         public GameObject AlarmPoint;
@@ -17,8 +18,15 @@ namespace Pathfinding
 
         public GameObject DestinationPoint;
 
-        public float CheckDeadTimer = 3f;
+        public float CheckDeadTimer;
+        public bool TimerStart = false;
+        public bool GoingToAlarm = false;
         public GameObject Vision;
+
+        public GameObject Graphics;
+        public float RunSpeed = 2.5f;
+        public float WalkSpeed = 1.7f;
+
         void Start()
         {
             ChangeDestinationPoint(RandomWalkPoint(WalkPoints, WalkPoint));
@@ -26,20 +34,35 @@ namespace Pathfinding
 
         private void FixedUpdate()
         {
-            if(IsFree == false)
+            if (IsFree == false)
             {
-                RandomAlarmPoint(AlarmPointsLEFT, AlarmPointsRIGHT); //Должно сработать 1 раз
+                if(GoingToAlarm == false)
+                {
+                    RandomAlarmPoint(AlarmPointsLEFT, AlarmPointsRIGHT); //Должно сработать 1 раз
+                    Run();
+                }
+
                 ChangeDestinationPoint(AlarmPoint); //Должно сработать 1 раз
+                if(Vision.GetComponent<NPCVision>().DeadComrade.tag == "CheckedDeadComrade")
+                {
+                    TimerReset();
+                }
                 if (CheckWalkPointDistance(DestinationPoint) == true)
                 {
-                    CheckingDeadComrade(CheckDeadTimer);
+                    Walk();
+                    CheckDeadTimer -= Time.fixedDeltaTime;
+                    if (CheckDeadTimer <= 0f)
+                    {
+                        TimerReset();
+                    }
                 }
             }
-            else if(IsFree == true)
+            else if (IsFree == true)
             {
-                if(CheckWalkPointDistance(DestinationPoint) == true)
+                if (CheckWalkPointDistance(DestinationPoint) == true)
                 {
                     ChangeDestinationPoint(RandomWalkPoint(WalkPoints, WalkPoint)); //Должно сработать 1 раз?????
+                    Walk();
                 }
             }
         }
@@ -57,11 +80,12 @@ namespace Pathfinding
 
         public void RandomAlarmPoint(GameObject[] AlarmPointsLeft, GameObject[] AlarmPointsRight)
         {
-            if(gameObject.GetComponent<AIPath>().desiredVelocity.x >= 0.01f)
+            GoingToAlarm = true;
+            if(gameObject.transform.position.x < AlarmTrigger.transform.position.x)
             {
                 AlarmPoint = AlarmPointsLeft[Random.Range(0, AlarmPointsLeft.Length - 1)];
             }
-            else if (gameObject.GetComponent<AIPath>().desiredVelocity.x <= -0.01f)
+            else if(gameObject.transform.position.x > AlarmTrigger.transform.position.x)
             {
                 AlarmPoint = AlarmPointsRight[Random.Range(0, AlarmPointsRight.Length - 1)];
             }
@@ -92,16 +116,50 @@ namespace Pathfinding
             }
         }
 
-        public void CheckingDeadComrade(float Timer)
+        /*public void CheckingDeadComrade(float Timer)
         {
+            if(TimerStart == false)
+            {
+                Timer = 30f;
+                TimerStart = true;
+            }
+
+            Debug.Log("" + Timer + " - " + Time.fixedDeltaTime + " = " + (Timer - Time.fixedDeltaTime));
             Timer -= Time.fixedDeltaTime;
+            
             if(Timer <= 0f)
             {
                 Timer = 3f;
                 Vision.GetComponent<NPCVision>().DeadComrade.tag = "CheckedDeadComrade";
                 Vision.GetComponent<NPCVision>().AlarmTrigger.SetActive(false);
                 IsFree = true;
+                GoingToAlarm = false;
+                TimerStart = false;
             }
+        } */
+
+        public void Run()
+        {
+            Graphics.GetComponent<Animator>().SetBool("Walk", false);
+            gameObject.GetComponent<AIPath>().maxSpeed = RunSpeed;
         }
+
+        public void Walk()
+        {
+            Graphics.GetComponent<Animator>().SetBool("Walk", true);
+            gameObject.GetComponent<AIPath>().maxSpeed = WalkSpeed;
+        }
+
+        public void TimerReset()
+        {
+            CheckDeadTimer = 3f;
+            Vision.GetComponent<NPCVision>().DeadComrade.tag = "CheckedDeadComrade";
+            Vision.GetComponent<NPCVision>().AlarmTrigger.SetActive(false);
+            IsFree = true;
+            GoingToAlarm = false;
+            TimerStart = false;
+            Walk();
+        }
+
     }
 }
