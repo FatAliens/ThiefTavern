@@ -1,19 +1,17 @@
 ﻿using System;
-using System.Collections;
+using UnityEngine;
 using System.Collections.Generic;
-using DG.Tweening;
-using UnityEngine;
-using UnityEngine;
-using UnityEngine.InputSystem.Interactions;
 
 public class MoveController : MonoBehaviour
 {
+    [SerializeField] private bool _isGizmo;
     [SerializeField, Range(0, 10f)] private float _speed;
     [SerializeField, Range(1, 10f)] private float _runSpeedFactor;
 
     private PlayerInput _input;
     private Transform _transform;
 
+    private Vector2 _contactNormal;
     private float _horizontalMove;
     private bool _isHide;
     private bool _isRun;
@@ -23,7 +21,7 @@ public class MoveController : MonoBehaviour
     {
         _input = new PlayerInput();
         _transform = transform;
-        
+
         ConfigureInput();
     }
 
@@ -86,17 +84,19 @@ public class MoveController : MonoBehaviour
             {
                 deltaMove *= _runSpeedFactor;
             }
-            
+
             if (deltaMove < 0)
             {
-                _transform.localScale = new Vector2(-1,1);
+                _transform.localScale = new Vector2(-1, 1);
             }
             else if (deltaMove > 0)
             {
-                _transform.localScale = new Vector2(1,1);
+                _transform.localScale = new Vector2(1, 1);
             }
 
-            _transform.Translate(deltaMove, 0, 0);
+            var moveProject = Vector3.ProjectOnPlane(new Vector3(deltaMove, 0), _contactNormal);
+
+            _transform.Translate(moveProject);
         }
     }
 
@@ -114,5 +114,21 @@ public class MoveController : MonoBehaviour
         {
             _onHideZone = false;
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        _contactNormal = other.contacts[0].normal;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (!_isGizmo || !Application.IsPlaying(this))
+        {
+            return;
+        }
+        
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(_transform.position, _transform.position - (Vector3) _contactNormal);
     }
 }
