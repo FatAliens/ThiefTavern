@@ -19,7 +19,7 @@
                     "name": "",
                     "id": "7034f363-9810-44be-bba3-146a427844a3",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "processors": "",
                     "groups": "Android",
                     "action": "ItemPickUp",
