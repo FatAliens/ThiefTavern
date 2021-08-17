@@ -11,7 +11,22 @@ public class ClickableObject : MonoBehaviour
 {
     [SerializeField]private UnityEvent OnClick;
     [SerializeField] private float SecondsTilDestroy;
-    
+    [SerializeField] private UnityEvent OnItemCollected;
+
+    public int itemCollected = 0;
+
+
+    private void Awake()
+    {
+    }
+    private void Start()
+    {
+        
+    }
+    private void Update()
+    {
+        
+    }
     private IEnumerator WaitForSeconds()
     {
         OnClick?.Invoke();
@@ -27,9 +42,11 @@ public class ClickableObject : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
             if (hit.transform == transform)
             {
-                Debug.Log("Click to "+ transform.name);
                 StartCoroutine(nameof(WaitForSeconds));
+                OnItemCollected.Invoke();
+                itemCollected++;
             }
         }
     }
+    
 }
