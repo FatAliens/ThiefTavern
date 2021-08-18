@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: GlobalWalkPoint
   m_EditorClassIdentifier: 
   AlarmPoint: {fileID: 0}
-  IsActive: 0
+  IsActive: 1

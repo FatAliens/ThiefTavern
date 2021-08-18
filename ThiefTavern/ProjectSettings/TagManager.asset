@@ -6,12 +6,9 @@ TagManager:
   tags:
   - hide_zone
   - Cityzen
-  - Guard
-  - Archer
-  - Dog
-  - Priest
   - DeadComrade
   - CheckedDeadComrade
+  - Alive_NPC
   layers:
   - Default
   - TransparentFX
@@ -23,7 +20,6 @@ TagManager:
   - 
   - Platform
   - Obstacle
-  - 
   - 
   - 
   - 
