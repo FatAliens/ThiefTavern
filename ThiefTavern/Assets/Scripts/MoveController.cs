@@ -1,22 +1,17 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Interactions;
+using System.Collections.Generic;
 
 public class MoveController : MonoBehaviour
 {
+    [SerializeField] private bool _isGizmo;
     [SerializeField, Range(0, 10f)] private float _speed;
     [SerializeField, Range(1, 10f)] private float _runSpeedFactor;
-    [SerializeField] private LayerMask _raycastFilter;
-    [SerializeField] private Transform _raycastPosition;
 
     private PlayerInput _input;
     private Transform _transform;
-    private SpriteRenderer _renderer;
 
+    private Vector2 _contactNormal;
     private float _horizontalMove;
     private bool _isHide;
     private bool _isRun;
@@ -25,15 +20,18 @@ public class MoveController : MonoBehaviour
     private void Awake()
     {
         _input = new PlayerInput();
+        _transform = transform;
 
+        ConfigureInput();
+    }
+
+    private void ConfigureInput()
+    {
         _input.Player.Hide.started += (context) => OnHideStarted();
         _input.Player.Hide.performed += (context) => OnHidePerformed();
 
         _input.Player.Run.started += (context) => OnRunStarted();
         _input.Player.Run.performed += (context) => OnRunPerformed();
-
-        _transform = transform;
-        _renderer = GetComponent<SpriteRenderer>();
     }
 
     private void OnEnable()
@@ -76,37 +74,29 @@ public class MoveController : MonoBehaviour
     {
         if (_isHide && _onHideZone)
         {
-            _renderer.DOColor(Color.gray, 1f);
+            //todo hide animation
         }
         else
         {
-            if (_renderer.color != Color.white)
-            {
-                _renderer.DOColor(Color.white, 1f);
-            }
-
             float deltaMove = _horizontalMove * Time.fixedDeltaTime * _speed;
 
-            deltaMove = _isRun ? deltaMove * _runSpeedFactor : deltaMove;
-
+            if (_isRun)
+            {
+                deltaMove *= _runSpeedFactor;
+            }
 
             if (deltaMove < 0)
             {
-                _transform.localScale = new Vector2(-1,1);
+                _transform.localScale = new Vector2(-1, 1);
             }
             else if (deltaMove > 0)
             {
-                _transform.localScale = new Vector2(1,1);
+                _transform.localScale = new Vector2(1, 1);
             }
 
-            var raycastHit = Physics2D.Raycast(_raycastPosition.position, Vector2.down, 100, _raycastFilter);
-            if (raycastHit.collider != null)
-            {
-                _transform.rotation = Quaternion.Euler(0,0,raycastHit.collider.gameObject.transform.rotation.eulerAngles.z);
-                Debug.Log(raycastHit.collider.name);
-            }
+            var moveProject = Vector3.ProjectOnPlane(new Vector3(deltaMove, 0), _contactNormal);
 
-            _transform.Translate(deltaMove, 0, 0);
+            _transform.Translate(moveProject);
         }
     }
 
@@ -124,5 +114,21 @@ public class MoveController : MonoBehaviour
         {
             _onHideZone = false;
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        _contactNormal = other.contacts[0].normal;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (!_isGizmo || !Application.IsPlaying(this))
+        {
+            return;
+        }
+        
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(_transform.position, _transform.position - (Vector3) _contactNormal);
     }
 }
